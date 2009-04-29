@@ -533,7 +533,13 @@ module DICOM
       end
       return value
     end # of method get_value
-
+    
+    # Can return values from the DICOM header using a hash (e.g dcm.find_value_by_header["0020,000D"])
+    def find_value_by_tag
+      header = Hash.new
+      @tags.length.times { |i| header.merge!( @tags[i] => @values[i] ) }
+      return header
+    end
 
     # Returns the raw data of the requested DICOM data element.
 		# Data element may be specified by array position, tag or name.
